@@ -289,4 +289,5 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg,
 	}
 	// if msg received isn't one of the message already handled forward it to defualt window msg function
 	return DefWindowProc(hwnd, iMsg, wParam, lParam);
+
 }
