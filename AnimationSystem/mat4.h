@@ -48,3 +48,8 @@ struct mat4 {
 		zx(_20), zy(_21), zz(_22), zw(_23),
 		tx(_30), ty(_31), tz(_32), tw(_33) { }
 };
+
+bool operator!=(const mat4& a, const mat4& b);
+bool operator==(const mat4& a, const mat4& b);
+mat4 operator+(const mat4& a, const mat4& b);
+mat4 operator*(const mat4& m, float f);
