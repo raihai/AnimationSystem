@@ -3,7 +3,7 @@
 
 Quaternion AngleAxis(float angle, const vec3& axis)
 {
-    vec3 norm = normalized(axis);
+    vec3 norm = Normalised(axis);
     float s = sinf(angle * 0.5f);
     return Quaternion(norm.x * s,
         norm.y * s,
@@ -15,8 +15,8 @@ Quaternion AngleAxis(float angle, const vec3& axis)
 
 Quaternion FromTo(const vec3& from, const vec3& to)
 {
-    vec3 f = normalized(from);
-    vec3 t = normalized(to);
+    vec3 f = Normalised(from);
+    vec3 t = Normalised(to);
     if (f == t) {
         return Quaternion();
     }
@@ -28,21 +28,21 @@ Quaternion FromTo(const vec3& from, const vec3& to)
         if (fabsf(f.z) < fabs(f.y) && fabs(f.z) < fabsf(f.x)) {
             ortho = vec3(0, 0, 1);
         }
-        vec3 axis = normalized(cross(f, ortho));
+        vec3 axis = Normalised(Cross(f, ortho));
         return Quaternion(axis.x, axis.y, axis.z, 0);
     }
 
-    vec3 half = normalized(f + t);
-    vec3 axis = cross(f, half);
-    return Quaternion(axis.x, axis.y, axis.z, dot(f, half));
+    vec3 half = Normalised(f + t);
+    vec3 axis = Cross(f, half);
+    return Quaternion(axis.x, axis.y, axis.z, Dot(f, half));
 }
 
-vec3 getAxis(const Quaternion& quat) {
-    return normalized(vec3(quat.x, quat.y, quat.z));
+vec3 GetAxis(const Quaternion& quat) {
+    return Normalised(vec3(quat.x, quat.y, quat.z));
 }
 
 
-float getAngle(const Quaternion& quat) {
+float GetAngle(const Quaternion& quat) {
     return 2.0f * acosf(quat.w);
 }
 
@@ -77,15 +77,15 @@ Quaternion operator-(const Quaternion& q)
 
 vec3 operator*(const Quaternion& q, const vec3& v)
 {
-    return q.vector * 2.0f * dot(q.vector, v) +
-        v * (q.scalar * q.scalar - dot(q.vector, q.vector)) +
-        cross(q.vector, v) * 2.0f * q.scalar;
+    return q.vector * 2.0f * Dot(q.vector, v) +
+        v * (q.scalar * q.scalar - Dot(q.vector, q.vector)) +
+        Cross(q.vector, v) * 2.0f * q.scalar;
 }
 
 Quaternion operator^(const Quaternion& q, float f)
 {
     float angle = 2.0f * acosf(q.scalar);
-    vec3 axis = normalized(q.vector);
+    vec3 axis = Normalised(q.vector);
     float halfCos = cosf(f * angle * 0.5f);
     float halfSin = sinf(f * angle * 0.5f);
     return Quaternion(axis.x * halfSin,
@@ -120,17 +120,17 @@ bool SameOrientation(const Quaternion& l, const Quaternion& r)
             fabsf(l.w + r.w) <= QUAT_EPSILON);
 }
 
-float dot(const Quaternion& a, const Quaternion& b)
+float Dot(const Quaternion& a, const Quaternion& b)
 {
     return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
 }
 
-float lenSq(const Quaternion& q)
+float LenSq(const Quaternion& q)
 {
     return q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w;
 }
 
-float len(const Quaternion& q)
+float Len(const Quaternion& q)
 {
     float lenSq = q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w;
     if (lenSq < QUAT_EPSILON) {
@@ -139,7 +139,7 @@ float len(const Quaternion& q)
     return sqrtf(lenSq);
 }
 
-void normalize(Quaternion& q)
+void Normalise(Quaternion& q)
 {
     float lenSq = q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w;
     if (lenSq < QUAT_EPSILON) {
@@ -153,7 +153,7 @@ void normalize(Quaternion& q)
 
 }
 
-Quaternion normalized(const Quaternion& q)
+Quaternion Normalised(const Quaternion& q)
 {
     float lenSq = q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w;
     if (lenSq < QUAT_EPSILON) {
@@ -163,7 +163,7 @@ Quaternion normalized(const Quaternion& q)
     return Quaternion(q.x * il, q.y * il, q.z * il, q.w * il);
 }
 
-Quaternion conjugate(const Quaternion& q)
+Quaternion Conjugate(const Quaternion& q)
 {
     return Quaternion(
         -q.x,
@@ -173,7 +173,7 @@ Quaternion conjugate(const Quaternion& q)
     );
 }
 
-Quaternion inverse(const Quaternion& q)
+Quaternion Inverse(const Quaternion& q)
 {
     float lenSq = q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w;
     if (lenSq < QUAT_EPSILON) {
@@ -188,32 +188,32 @@ Quaternion inverse(const Quaternion& q)
     );
 }
 
-Quaternion mix(const Quaternion& from, const Quaternion& to, float t)
+Quaternion Mix(const Quaternion& from, const Quaternion& to, float t)
 {
     return from * (1.0f - t) + to * t;
 }
 
-Quaternion nlerp(const Quaternion& from, const Quaternion& to, float t)
+Quaternion Nlerp(const Quaternion& from, const Quaternion& to, float t)
 {
-    return normalized(from + (to - from) * t);
+    return Normalised(from + (to - from) * t);
 }
 
-Quaternion slerp(const Quaternion& start, const Quaternion& end, float t)
+Quaternion Slerp(const Quaternion& start, const Quaternion& end, float t)
 {
-    if (fabsf(dot(start, end)) > 1.0f - QUAT_EPSILON) {
-        return nlerp(start, end, t);
+    if (fabsf(Dot(start, end)) > 1.0f - QUAT_EPSILON) {
+        return Nlerp(start, end, t);
     }
-    Quaternion delta = inverse(start) * end;
-    return normalized((delta ^ t) * start);
+    Quaternion delta = Inverse(start) * end;
+    return Normalised((delta ^ t) * start);
 }
 
-Quaternion lookRotation(const vec3& direction, const vec3& up)
+Quaternion LookRotation(const vec3& direction, const vec3& up)
 {
     // Find orthonormal basis vectors
-    vec3 f = normalized(direction); // Object Forward
-    vec3 u = normalized(up); // Desired Up
-    vec3 r = cross(u, f); // Object Right
-    u = cross(f, r); // Object Up
+    vec3 f = Normalised(direction); // Object Forward
+    vec3 u = Normalised(up); // Desired Up
+    vec3 r = Cross(u, f); // Object Right
+    u = Cross(f, r); // Object Up
     // From world forward to object forward
     Quaternion worldToObject = FromTo(vec3(0, 0, 1), f);
     // what direction is the new object up?
@@ -225,10 +225,10 @@ Quaternion lookRotation(const vec3& direction, const vec3& up)
     Quaternion result = worldToObject * u2u;
 
     // Don't forget to normalize the result
-    return normalized(result);
+    return Normalised(result);
 }
 
-mat4 quatToMat4(const Quaternion& q)
+mat4 QuatToMat4(const Quaternion& q)
 {
     vec3 r = q * vec3(1, 0, 0);
     vec3 u = q * vec3(0, 1, 0);
@@ -240,13 +240,13 @@ mat4 quatToMat4(const Quaternion& q)
     );
 }
 
-Quaternion mat4ToQuat(const mat4& m)
+Quaternion Mat4ToQuat(const mat4& m)
 {
-    vec3 up = normalized(vec3(m.up.x, m.up.y, m.up.z));
-    vec3 forward = normalized(
+    vec3 up = Normalised(vec3(m.up.x, m.up.y, m.up.z));
+    vec3 forward = Normalised(
         vec3(m.forward.x, m.forward.y, m.forward.z));
-    vec3 right = cross(up, forward);
-    up = cross(forward, right);
+    vec3 right = Cross(up, forward);
+    up = Cross(forward, right);
 
-    return lookRotation(forward, up);
+    return LookRotation(forward, up);
 }

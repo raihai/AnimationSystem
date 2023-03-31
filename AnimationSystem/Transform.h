@@ -20,9 +20,9 @@ struct Transform {
 
 Transform Combine(const Transform& a, const Transform& b);
 Transform Inverse(const Transform& t);
-Transform mix(const Transform& a, const Transform& b, float t);
-mat4 transformToMat4(const Transform& t);
-Transform mat4ToTransform(const mat4& m);
+Transform Mix(const Transform& a, const Transform& b, float t);
+mat4 TransformToMat4(const Transform& t);
+Transform Mat4ToTransform(const mat4& m);
 
-vec3 transformPoint(const Transform& a, const vec3& b);
-vec3 transformVector(const Transform& a, const vec3& b);
+vec3 TransformPoint(const Transform& a, const vec3& b);
+vec3 TransformVector(const Transform& a, const vec3& b);

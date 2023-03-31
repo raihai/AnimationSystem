@@ -29,8 +29,8 @@ struct Quaternion {
 
 Quaternion AngleAxis(float angle, const vec3& axis);
 Quaternion FromTo(const vec3& from, const vec3& to);
-vec3 getAxis(const Quaternion& quat);
-float getAngle(const Quaternion& quat);
+vec3 GetAxis(const Quaternion& quat);
+float GetAngle(const Quaternion& quat);
 
 Quaternion operator+(const Quaternion& a, const Quaternion& b);
 Quaternion operator-(const Quaternion& a, const Quaternion& b);
@@ -44,21 +44,21 @@ bool operator==(const Quaternion& left, const Quaternion& right);
 bool operator!=(const Quaternion& a, const Quaternion& b);
 bool SameOrientation(const Quaternion& l, const Quaternion& r);
 
-float dot(const Quaternion& a, const Quaternion& b);
-float lenSq(const Quaternion& q);
-float len(const Quaternion& q);
+float Dot(const Quaternion& a, const Quaternion& b);
+float LenSq(const Quaternion& q);
+float Len(const Quaternion& q);
 
-void normalize(Quaternion& q);
-Quaternion normalized(const Quaternion& q);
+void Normalise(Quaternion& q);
+Quaternion Normalised(const Quaternion& q);
 
-Quaternion conjugate(const Quaternion& q);
-Quaternion inverse(const Quaternion& q);
+Quaternion Conjugate(const Quaternion& q);
+Quaternion Inverse(const Quaternion& q);
 
-Quaternion mix(const Quaternion& from, const Quaternion& to, float t);
-Quaternion nlerp(const Quaternion& from, const Quaternion& to, float t);
-Quaternion slerp(const Quaternion& start, const Quaternion& end, float t);
+Quaternion Mix(const Quaternion& from, const Quaternion& to, float t);
+Quaternion Nlerp(const Quaternion& from, const Quaternion& to, float t);
+Quaternion Slerp(const Quaternion& start, const Quaternion& end, float t);
 
-Quaternion lookRotation(const vec3& direction, const vec3& up);
+Quaternion LookRotation(const vec3& direction, const vec3& up);
 
-mat4 quatToMat4(const Quaternion& q);
-Quaternion mat4ToQuat(const mat4& m);
+mat4 QuatToMat4(const Quaternion& q);
+Quaternion Mat4ToQuat(const mat4& m);

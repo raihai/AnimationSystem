@@ -14,7 +14,7 @@ Transform Combine(const Transform& a, const Transform& b)
 Transform Inverse(const Transform& t)
 {
 	Transform inv;
-	inv.rotation = inverse(t.rotation);
+	inv.rotation = Inverse(t.rotation);
 	inv.scale.x = fabs(t.scale.x) < VEC3_EPSILON ?
 		0.0f : 1.0f / t.scale.x;
 	inv.scale.y = fabs(t.scale.y) < VEC3_EPSILON ?
@@ -27,19 +27,19 @@ Transform Inverse(const Transform& t)
 
 }
 
-Transform mix(const Transform& a, const Transform& b, float t)
+Transform Mix(const Transform& a, const Transform& b, float t)
 {
 	Quaternion bRot = b.rotation;
-	if (dot(a.rotation, bRot) < 0.0f) { // ensure it uses the shortest rotation path
+	if (Dot(a.rotation, bRot) < 0.0f) { // ensure it uses the shortest rotation path
 		bRot = -bRot;
 	}
 	return Transform(
-		lerp(a.position, b.position, t),
-		nlerp(a.rotation, bRot, t),
-		lerp(a.scale, b.scale, t));
+		Lerp(a.position, b.position, t),
+		Nlerp(a.rotation, bRot, t),
+		Lerp(a.scale, b.scale, t));
 }
 
-mat4 transformToMat4(const Transform& t)
+mat4 TransformToMat4(const Transform& t)
 {
 	// First, extract the rotation basis of the transform
 	vec3 x = t.rotation * vec3(1, 0, 0);
@@ -60,18 +60,18 @@ mat4 transformToMat4(const Transform& t)
 	);
 }
 
-Transform mat4ToTransform(const mat4& m)
+Transform Mat4ToTransform(const mat4& m)
 {
 	Transform out;
 	out.position = vec3(m.v[12], m.v[13], m.v[14]);
-	out.rotation = mat4ToQuat(m);
+	out.rotation = Mat4ToQuat(m);
 	mat4 rotScaleMat(
 		m.v[0], m.v[1], m.v[2], 0,
 		m.v[4], m.v[5], m.v[6], 0,
 		m.v[8], m.v[9], m.v[10], 0,
 		0, 0, 0, 1
 	);
-	mat4 invRotMat = quatToMat4(inverse(out.rotation));
+	mat4 invRotMat = QuatToMat4(Inverse(out.rotation));
 	mat4 scaleSkewMat = rotScaleMat * invRotMat;
 	out.scale = vec3(
 		scaleSkewMat.v[0],
@@ -81,7 +81,7 @@ Transform mat4ToTransform(const mat4& m)
 	return out;
 }
 
-vec3 transformPoint(const Transform& a, const vec3& b)
+vec3 TransformPoint(const Transform& a, const vec3& b)
 {
 	vec3 out;
 	out = a.rotation * (a.scale * b);
@@ -89,7 +89,7 @@ vec3 transformPoint(const Transform& a, const vec3& b)
 	return out;
 }
 
-vec3 transformVector(const Transform& a, const vec3& b)
+vec3 TransformVector(const Transform& a, const vec3& b)
 {
 	vec3 out;
 	out = a.rotation * (a.scale * b);
