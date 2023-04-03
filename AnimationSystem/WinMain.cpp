@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <iostream>
 #include "Application.h"
+#include "Test.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, PSTR, int);
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -41,7 +42,7 @@ wchar_t* wideString;
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int iCmdShow) {
-	gApplication = new Application();
+	gApplication = new Test();
 	
 	// standard window definition
 	WNDCLASSEX wndclass;

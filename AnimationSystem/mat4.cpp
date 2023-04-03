@@ -199,17 +199,17 @@ mat4 ortho(float l, float r, float b, float t, float n, float f)
 
 mat4 lookAt(const vec3& position, const vec3& target, const vec3& up)
 {
-	vec3 f = normalized(target - position) * -1.0f;
-	vec3 r = cross(up, f); // Right handed
+	vec3 f = Normalised(target - position) * -1.0f;
+	vec3 r = Cross(up, f); // Right handed
 	if (r == vec3(0, 0, 0)) {
 		return mat4(); // Error
 	}
-	normalize(r);
-	vec3 u = normalized(cross(f, r)); // Right handed
+	Normalise(r);
+	vec3 u = Normalised(Cross(f, r)); // Right handed
 	vec3 t = vec3(
-		-dot(r, position),
-		-dot(u, position),
-		-dot(f, position)
+		-Dot(r, position),
+		-Dot(u, position),
+		-Dot(f, position)
 	);
 	return mat4(
 		// Transpose upper 3x3 matrix to invert it

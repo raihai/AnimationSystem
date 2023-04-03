@@ -1,7 +1,8 @@
-#pragma once
+#ifndef _H_TRANSFORM_
+#define _H_TRANSFORM_
 
 #include "vec3.h"
-#include "Quarternion.h"
+#include "Quaternion.h"
 
 struct Transform {
 	vec3 position;
@@ -26,3 +27,6 @@ Transform Mat4ToTransform(const mat4& m);
 
 vec3 TransformPoint(const Transform& a, const vec3& b);
 vec3 TransformVector(const Transform& a, const vec3& b);
+
+
+#endif // !_TRANSFORM_

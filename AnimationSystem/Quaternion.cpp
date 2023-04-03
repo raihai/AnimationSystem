@@ -1,4 +1,4 @@
-#include "Quarternion.h"
+#include "Quaternion.h"
 #include <cmath>
 
 Quaternion AngleAxis(float angle, const vec3& axis)

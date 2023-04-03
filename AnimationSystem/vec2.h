@@ -1,3 +1,6 @@
+#ifndef _H_VEC2_
+#define _H_VEC2_
+
 template<typename T>
 struct TVec2 {
 	union {
@@ -15,3 +18,5 @@ struct TVec2 {
 };
 typedef TVec2<float> vec2;
 typedef TVec2<int> ivec2;
+
+#endif
