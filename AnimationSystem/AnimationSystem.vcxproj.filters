@@ -34,6 +34,12 @@
     <Filter Include="Source Files\Window">
       <UniqueIdentifier>{cbcf0d4c-089a-4f2c-83f5-7711318a5c12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Animation">
+      <UniqueIdentifier>{b62b6192-be45-4b3d-aa77-5cb0db22942e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation">
+      <UniqueIdentifier>{d7f5733a-1390-4ba9-a4cc-cd362471b2d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vec2.h">
@@ -87,6 +93,24 @@
     <ClInclude Include="khrplatform.h">
       <Filter>Header Files\Window</Filter>
     </ClInclude>
+    <ClInclude Include="Interpolation.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Track.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="cgltf.h">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTFLoader.h">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformTrack.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vec3.cpp">
@@ -130,6 +154,18 @@
     </ClCompile>
     <ClCompile Include="glad.c">
       <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="cgltf.c">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="GLTFLoader.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Track.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformTrack.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
