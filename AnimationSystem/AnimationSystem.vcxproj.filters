@@ -111,6 +111,9 @@
     <ClInclude Include="TransformTrack.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="Pose.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vec3.cpp">
@@ -165,6 +168,9 @@
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
     <ClCompile Include="TransformTrack.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Pose.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

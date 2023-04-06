@@ -138,6 +138,7 @@
     <ClInclude Include="Interpolation.h" />
     <ClInclude Include="khrplatform.h" />
     <ClInclude Include="mat4.h" />
+    <ClInclude Include="Pose.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
@@ -159,6 +160,7 @@
     <ClCompile Include="GLTFLoader.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="mat4.cpp" />
+    <ClCompile Include="Pose.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="std_image.cpp" />
