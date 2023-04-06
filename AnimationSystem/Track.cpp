@@ -238,7 +238,9 @@ T Track<T, N>::SampleCubic(float time, bool looping) {
 	if (frameDelta <= 0.0f) {
 		return T();
 	}
+
 	float t = (trackTime - thisTime) / frameDelta;
+
 	size_t fltSize = sizeof(float);
 	T point1 = Cast(&mFrames[thisFrame].mValue[0]);
 	T slope1;// = mFrames[thisFrame].mOut * frameDelta;

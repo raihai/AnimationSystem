@@ -80,8 +80,7 @@ float TransformTrack::GetEndTime() {
 	return result;
 }
 
-Transform TransformTrack::Sample(const Transform& ref,
-	float time, bool looping) {
+Transform TransformTrack::Sample(const Transform& ref, float time, bool looping) {
 	Transform result = ref; // Assign default values
 	if (mPosition.Size() > 1) { // Only assign if animated
 		result.position = mPosition.Sample(time, looping);
